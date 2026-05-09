@@ -9,7 +9,7 @@ export async function getCharacters(page = 1, filters = {}) {
         return await response.json();
     } catch (error) {
         console.error('Error en la petición API: ', error);
-        return { error: 'No se pudieron cargar los personajer' };
+        return { error: 'No se pudieron cargar los personajes' };
     }
 
 }

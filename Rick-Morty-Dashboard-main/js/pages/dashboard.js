@@ -74,6 +74,7 @@ export const dashboard = {
             const isFav = store.isFavorite(char.id);
             const card = document.createElement('div');
             card.className = 'character-card';
+
             card.innerHTML = `
             <div class="card-image-wrapper">
                 <img src="${char.image}" alt="${char.name}" loading="lazy">
@@ -83,8 +84,14 @@ export const dashboard = {
                 <div class="status-label status-${char.status.toLowerCase()}">
                     <span class="status-indicator"></span>
                     ${char.status}
-                </div>`;
-            
+                </div>
+                <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${char.id}">
+                    <i data-lucide="star"></i>
+                    <span>${isFav ? 'En Favoritos' : 'Añadir a Favoritos'}</span>
+                </button>
+            </div>
+        `;
+
             card.querySelector('.fav-btn').addEventListener('click', (e) => {
                 const btn = e.currentTarget;
                 const added = store.toggleFavorite(char);
@@ -93,8 +100,9 @@ export const dashboard = {
                 this.renderFavorites();
                 lucide.createIcons();
             });
+
             this.elements.grid.appendChild(card);
-        })
+        });
     },
 
     renderFavorites() {
@@ -142,6 +150,6 @@ export const dashboard = {
     },
 
     showLoader(show) {
-        this.elements.loader.classList.toogle('hidden', !show);
+        this.elements.loader.classList.toggle('hidden', !show);
     }
 };
